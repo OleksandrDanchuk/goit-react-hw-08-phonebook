@@ -1,0 +1,9 @@
+.list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 538px;
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+}
