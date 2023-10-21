@@ -43,9 +43,16 @@ export const FormAddContacts = () => {
       ? alert(
           `${currentName.value} or  number: ${currentNumber.value} is already in contacts.`
         )
-      : dispatch(addContact(state));
+      : addContactHandler();
+  };
 
-    setState({ name: '', number: '' });
+  const addContactHandler = () => {
+    try {
+      dispatch(addContact(state));
+      setState({ name: '', number: '' });
+    } catch (e) {
+      throw e;
+    }
   };
 
   return (

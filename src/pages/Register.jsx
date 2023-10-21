@@ -33,12 +33,8 @@ export const RegisterUser = () => {
   const sendRegisterForm = e => {
     e.preventDefault();
     dispatch(register(newUser));
-    setNewUser({
-      name: '',
-      email: '',
-      password: '',
-    });
   };
+
   const onClickShow = () => setShow(!show);
   return (
     <>
@@ -88,6 +84,8 @@ export const RegisterUser = () => {
                   required
                   placeholder="Password"
                   type={show ? 'text' : 'password'}
+                  pattern=".{7,}"
+                  title="Password must contain at least 7 characters"
                 />
                 <InputRightElement>
                   <Button type="button" onClick={onClickShow}>
