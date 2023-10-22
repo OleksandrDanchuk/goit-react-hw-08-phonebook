@@ -21,6 +21,9 @@ export const register = createAsyncThunk(
 
       return data;
     } catch (error) {
+      if (error?.code === 'ERR_BAD_REQUEST') {
+        alert('Account with this email already exist');
+      }
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -33,6 +36,9 @@ export const login = createAsyncThunk('auth/login', async (user, thunkAPI) => {
 
     return data;
   } catch (error) {
+    if (error?.code === 'ERR_BAD_REQUEST') {
+      alert('Wrong userrname or password');
+    }
     return thunkAPI.rejectWithValue(error.message);
   }
 });

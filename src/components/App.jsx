@@ -13,6 +13,7 @@ import { useEffect } from 'react';
 import { refreshCurrentUser } from 'redux/auth/operationsAuth';
 import { RestrictedRoute } from './Routes/PuplicRoute';
 import { PrivatRoute } from './Routes/PrivateRoute';
+import { Navigate } from 'react-router-dom';
 import { Footer } from './Footer/Footer';
 import { Box, Flex } from '@chakra-ui/react';
 
@@ -50,7 +51,7 @@ export const App = () => {
               <PrivatRoute redirectTo="/login" component={<Contacts />} />
             }
           />
-          <Route path="*" element={<Home />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Box>
       <Box as="footer" h={10} bg="var(--chakra-colors-blue-500)" mt={10}>

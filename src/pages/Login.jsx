@@ -29,14 +29,10 @@ export const Login = () => {
   };
 
   const sendUserForm = e => {
-    // console.log(userData);
     e.preventDefault();
     dispatch(login(userData));
-    setUserData({
-      email: '',
-      password: '',
-    });
   };
+
   const onClickShow = () => setShow(!show);
   return (
     <>

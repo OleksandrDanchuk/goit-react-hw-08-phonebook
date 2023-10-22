@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateContact } from 'redux/operations';
-import { getToUpdate } from 'redux/selectors';
+import { getToUpdate, getContacts } from 'redux/selectors';
 import { createPortal } from 'react-dom';
 import {
   Input,
@@ -22,19 +22,31 @@ const rootModalRef = document.querySelector('#modal');
 export const EditForm = ({ onClose, showModal }) => {
   const dispatch = useDispatch();
   const editingContact = useSelector(getToUpdate);
+  const currentContacts = useSelector(getContacts);
 
   const [nameCurrent, setName] = useState(editingContact.name);
   const [numberCurrent, setNumber] = useState(editingContact.number);
 
   const handleEditForm = evt => {
     evt.preventDefault();
-    dispatch(
-      updateContact({
-        id: editingContact.id,
-        name: nameCurrent,
-        number: numberCurrent,
-      })
+
+    const сheckRepetition = currentContacts.find(
+      ({ name, number }) =>
+        name.toLowerCase() === nameCurrent.toLowerCase() ||
+        number === numberCurrent
     );
+
+    сheckRepetition
+      ? alert(
+          `${nameCurrent} or  number: ${numberCurrent} is already in contacts.`
+        )
+      : dispatch(
+          updateContact({
+            id: editingContact.id,
+            name: nameCurrent,
+            number: numberCurrent,
+          })
+        );
 
     onClose();
   };
